@@ -98,7 +98,7 @@
             android:text="@string/deal"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:layout_gravity="|bottom"/>
+            android:layout_gravity="bottom"/>
 
         <Button
             android:id="@+id/hit_btn"
@@ -108,7 +108,7 @@
             android:text="@string/hit"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:layout_gravity="bottom|center"/>
+            android:layout_gravity="bottom"/>
 
         <Button
             android:id="@+id/stay_btn"
@@ -118,7 +118,7 @@
             android:text="@string/stay"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:layout_gravity="bottom|end"/>
+            android:layout_gravity="bottom"/>
 
     </LinearLayout>
 
