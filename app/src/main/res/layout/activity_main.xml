@@ -7,119 +7,206 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/round"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/rounds"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="32sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="32sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/wins"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/wins"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="32sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="32sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/losses"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/losses"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="32sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="32sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Dealer's Hand:"
+                android:textColor="@android:color/black"
+                android:paddingRight="12dp"/>
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/two_c"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/a_c"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/a_s"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ten_h"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/round"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/rounds"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/wins"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/wins"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/losses"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/losses"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@android:color/black"
-                android:textSize="32sp"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:paddingTop="72dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/two_c"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/a_c"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/a_s"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ten_h"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"/>
+            </LinearLayout>
+
+        </HorizontalScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
         <Button
             android:id="@+id/deal_btn"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="@string/deal"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:layout_gravity="bottom"/>
+            android:gravity="center"
+            android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/hit_btn"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="@string/hit"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:layout_gravity="bottom"/>
+            android:gravity="center"
+            android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/stay_btn"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="@string/stay"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:layout_gravity="bottom"/>
-
+            android:gravity="center"
+            android:layout_gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
