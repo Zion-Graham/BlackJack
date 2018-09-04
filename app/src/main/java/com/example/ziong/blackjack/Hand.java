@@ -76,13 +76,10 @@ public class Hand
         // Return the total value of the Hand
         return value;
     }
-
-    public static void main(String args[])
+    
+    public ArrayList<Card> getCards()
     {
-        Hand myHand = new Hand();
-        myHand.addCard(new Card("Ace of clubs", 11));
-        myHand.addCard(new Card("King of hearts", 10));
-        myHand.addCard(new Card("5 of hearts", 5));
-        System.out.println(myHand.getValue());
+        return handDeck;
     }
+
 }
