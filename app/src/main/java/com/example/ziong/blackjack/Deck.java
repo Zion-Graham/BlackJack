@@ -78,18 +78,4 @@ public class Deck
         }
         else return null;
     }
-
-
-    public static void main(String args[])
-    {
-        Deck deck = new Deck();
-        Card card1 = deck.removeCard();
-        Card card2 = deck.removeCard();
-        System.out.println(card1.getName());
-        System.out.println(card2.getName());
-        Hand hand = new Hand();
-        hand.addCard(card1);
-        hand.addCard(card2);
-        hand.getValue();
-    }
 }
