@@ -17,8 +17,16 @@ public class Player
    }
 
    // Prints the value of the player's hand
-   public void getHandValue()
+   public int getHandValue()
    {
-       playerHand.getValue();
+       return playerHand.getValue();
    }
+
+   public ArrayList<Card> getHand()
+   {
+       return playerHand.getCards();
+   }
+
 }
+
+
