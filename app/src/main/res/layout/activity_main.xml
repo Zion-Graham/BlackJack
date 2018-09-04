@@ -100,32 +100,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/two_c"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/a_c"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/a_s"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ten_h"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"/>
-                </LinearLayout>
+                    android:orientation="horizontal"
+                    android:id="@+id/dealer_deck"></LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>
         </LinearLayout>
@@ -143,32 +119,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/two_c"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/a_c"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/a_s"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ten_h"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"/>
-            </LinearLayout>
+                android:orientation="horizontal"
+                android:id="@+id/player_deck"></LinearLayout>
 
         </HorizontalScrollView>
         <LinearLayout
@@ -184,7 +136,8 @@
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:onClick="deal"/>
 
         <Button
             android:id="@+id/hit_btn"
