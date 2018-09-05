@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">Black Jack</string>
+    <string name="app_name">BlackJack</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="deal">deal</string>
     <string name="hit">Hit</string>
     <string name="stay">Stay</string>
-    <string name="wins">Wins</string>
-    <string name="rounds">Rounds</string>
-    <string name="losses">Losses</string>
+    <string name="wins">Win</string>
+    <string name="losses">Lose</string>
+    <string name="blackjacks">Blackjack</string>
+    <string name="draw">Draw</string>
 </resources>

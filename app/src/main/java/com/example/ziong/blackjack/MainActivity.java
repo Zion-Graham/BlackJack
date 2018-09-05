@@ -3,16 +3,22 @@ package com.example.ziong.blackjack;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private  Player player;
     private Player dealer;
     private Deck deck;
+
+    // Statistic variables
+    private int wins;
+    private int losses;
+    private int draws;
+    private int blackjacks;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +26,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    private void disableDealButton()
+    {
+        Button dealButton = findViewById(R.id.deal_btn);
+        Button hitButton = findViewById(R.id.hit_btn);
+        Button stayButton = findViewById(R.id.stay_btn);
+
+        // Disables the Deal button and enables the Hit and Stay buttons
+        dealButton.setEnabled(false);
+        hitButton.setEnabled(true);
+        stayButton.setEnabled(true);
+    }
+
+    private void enableDealButton()
+    {
+        Button dealButton = findViewById(R.id.deal_btn);
+        Button hitButton = findViewById(R.id.hit_btn);
+        Button stayButton = findViewById(R.id.stay_btn);
+
+        // Disables the Deal button and enables the Hit and Stay buttons
+        dealButton.setEnabled(true);
+        hitButton.setEnabled(false);
+        stayButton.setEnabled(false);
+    }
+
     public void deal(View view)
     {
-         player = new Player();
-         dealer = new Player();
-         deck = new Deck();
+
+        player = new Player();
+        dealer = new Player();
+        deck = new Deck();
         // Generate 3 random cards from the deck
         Card playerCard1 = deck.removeCard();
         Card playerCard2 = deck.removeCard();
@@ -38,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         dealer.hit(dealerCard);
         addPlayerDeckImages();
         addDealerDeckImages();
+
+        // Disables the deal button and enables the hit and stay buttons
+        disableDealButton();
     }
 
     private void addPlayerDeckImages()
@@ -62,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
             cardImage.setAdjustViewBounds(true);
             // Selects which card's image to use
             cardImage.setImageResource(getDrawableId(card.getName()));
+
+            cardImage.getLayoutParams().height = 400;
 
             playerDeck.addView(cardImage);
         }
@@ -91,6 +127,100 @@ public class MainActivity extends AppCompatActivity {
             cardImage.setImageResource(getDrawableId(card.getName()));
 
             dealerDeck.addView(cardImage);
+        }
+    }
+
+    private boolean bust(Player player)
+    {
+        return player.getHandValue() > 21;
+    }
+    // Checks if the player won
+    private boolean win()
+    {
+        return player.getHandValue() > dealer.getHandValue();
+    }
+
+    // Checks for a draw
+    private boolean draw()
+    {
+        return player.getHandValue() == dealer.getHandValue();
+    }
+
+    private boolean lose()
+    {
+        return player.getHandValue() < dealer.getHandValue();
+    }
+
+    private void updateScore(String result)
+    {
+        switch (result) {
+            case "win":
+                wins++;
+                TextView textview = findViewById(R.id.wins);
+                textview.setText(String.valueOf(wins));
+                break;
+            case "draw": {
+                draws++;
+                TextView textView = findViewById(R.id.draws);
+                textView.setText(String.valueOf(draws));
+                break;
+            }
+            case "lose": {
+                losses++;
+                TextView textView = findViewById(R.id.losses);
+                textView.setText(String.valueOf(losses));
+                break;
+            }
+        }
+
+
+    }
+
+
+    public void hit(View view)
+    {
+        player.hit(deck.removeCard());
+        addPlayerDeckImages();
+
+        if (bust(player))
+        {
+            updateScore("lose");
+            // Enables the deal button and disables the hit and stay buttons
+            enableDealButton();
+        }
+        // Prevent the player from busting after getting 21
+        else if(player.getHandValue() == 21)
+        {
+            Button hitButton = findViewById(R.id.hit_btn);
+            hitButton.setEnabled(false);
+        }
+    }
+
+    private void getDealerHand()
+    {
+        while (dealer.getHandValue() < 17)
+        {
+            dealer.hit(deck.removeCard());
+        }
+        addDealerDeckImages();
+    }
+
+    public void stay(View view)
+    {
+        enableDealButton();
+        getDealerHand();
+
+        if (bust(dealer) || win())
+        {
+            updateScore("win");
+        }
+        else if (draw())
+        {
+            updateScore("draw");
+        }
+        else if (lose())
+        {
+            updateScore("lose");
         }
     }
 
@@ -206,5 +336,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return -1;
     }
-
 }

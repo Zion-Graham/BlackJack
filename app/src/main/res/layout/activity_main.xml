@@ -23,41 +23,20 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/round"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:text="@string/rounds"
-                    android:gravity="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="32sp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@android:color/black"
-                    android:textSize="32sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/wins"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="@string/wins"
                     android:gravity="center"
                     android:textColor="@android:color/black"
-                    android:textSize="32sp"/>
+                    android:textSize="@dimen/stats_text_size"/>
                 <TextView
+                    android:id="@+id/wins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="0"
                     android:textColor="@android:color/black"
-                    android:textSize="32sp"/>
+                    android:textSize="@dimen/stats_text_size"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -65,20 +44,62 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/losses"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="@string/losses"
                     android:gravity="center"
                     android:textColor="@android:color/black"
-                    android:textSize="32sp"/>
+                    android:textSize="@dimen/stats_text_size"/>
+                <TextView
+                    android:id="@+id/losses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/stats_text_size"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/draw"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/stats_text_size"/>
+                <TextView
+                    android:id="@+id/draws"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/stats_text_size"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/blackjacks"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:text="@string/blackjacks"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/stats_text_size"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="0"
                     android:textColor="@android:color/black"
-                    android:textSize="32sp"/>
+                    android:textSize="@dimen/stats_text_size"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -114,13 +135,13 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:paddingTop="72dp">
+            android:layout_weight="3">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:id="@+id/player_deck"></LinearLayout>
+                android:id="@+id/player_deck"
+                android:gravity="bottom"></LinearLayout>
 
         </HorizontalScrollView>
         <LinearLayout
@@ -148,7 +169,9 @@
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:onClick="hit"
+            android:enabled="false"/>
 
         <Button
             android:id="@+id/stay_btn"
@@ -159,7 +182,9 @@
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:onClick="stay"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
