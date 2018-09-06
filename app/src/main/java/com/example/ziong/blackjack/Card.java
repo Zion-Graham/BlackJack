@@ -14,11 +14,15 @@ public class Card
         this.value = value;
     }
 
-    public String getName() {
+    // @Return the name of the card
+    public String getName()
+    {
         return name;
     }
 
-    public int getValue() {
+    // @Return the int value of the card
+    public int getValue()
+    {
         return value;
     }
 }

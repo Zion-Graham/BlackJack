@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/*
+ * This class manages the user interface in activity_main.xml based on the results of the BlackjackGame object
+ */
 public class MainActivity extends AppCompatActivity {
 
     BlackjackGame blackjackGame = new BlackjackGame();
