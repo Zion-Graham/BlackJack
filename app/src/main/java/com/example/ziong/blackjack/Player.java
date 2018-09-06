@@ -3,25 +3,25 @@ package com.example.ziong.blackjack;
 import java.util.ArrayList;
 
 /*
- * This class represents the Player in BlackJack
- * Each Player is able to do one of 5 actions Deal, Hit, Stay, Double, Split
- * Each player has a "hand", a deck of cards in his/her hand
+ * This class represents a Player in BlackJack
  */
 public class Player
 {
    private Hand playerHand = new Hand();
 
+   // Adds another card to the playerHand ArrayList
    public void hit(Card card)
    {
        playerHand.addCard(card);
    }
 
-   // Prints the value of the player's hand
+   // @Return the int value of the player's hand
    public int getHandValue()
    {
        return playerHand.getValue();
    }
 
+   // @Return the total value of all the cards in the player's hand
    public ArrayList<Card> getHand()
    {
        return playerHand.getCards();
