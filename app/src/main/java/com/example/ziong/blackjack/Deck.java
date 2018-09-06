@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /*
- * This class represents a deck of cards
+ * This class represents a full deck of 52 cards
  */
 public class Deck
 {
 
-    private ArrayList<Card> deck = new ArrayList<Card>();
+    private ArrayList<Card> deck = new ArrayList<>();
 
-    // Creates a full deck of 52 cards
+    // When instantiated adds a all 52 cards to the deck ArrayList
     Deck()
     {
         deck.add(new Card("Ace of clubs", 11));
