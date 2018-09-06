@@ -23,6 +23,7 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/winText"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="@string/wins"
@@ -44,6 +45,7 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/loseText"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="@string/losses"
@@ -65,6 +67,7 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/drawsText"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="@string/draw"
@@ -86,7 +89,7 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/blackjacks"
+                    android:id="@+id/blackjackText"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="@string/blackjacks"
@@ -94,6 +97,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/stats_text_size"/>
                 <TextView
+                    android:id="@+id/blackjacks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
