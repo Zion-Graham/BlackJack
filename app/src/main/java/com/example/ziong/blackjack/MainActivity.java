@@ -9,16 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /*
- * This class manages the user interface in activity_main.xml based on the results of the BlackjackGame object
+ * This class manages the user interface in activity_main.xml based on the results of a BlackjackGame object
  */
 public class MainActivity extends AppCompatActivity {
 
     BlackjackGame blackjackGame = new BlackjackGame();
 
-    /*----------------------------------------------------------------------------------------------
-     * Note all variables referencing XML in activity_main.xml must be instantiated after setContentView()
-     *--------------------------------------------------------------------------------------------*/
-
+/*----------------------------------------------------------------------------------------------
+   Note all variables referencing activity_main.xml must be instantiated after setContentView()
+ *--------------------------------------------------------------------------------------------*/
     // Buttons
     Button dealButton;
     Button hitButton;
@@ -29,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     TextView drawText;
     TextView loseText;
     TextView blackjackText;
+
+    // LinearLayout containing the dealer's card images
+    LinearLayout dealerDeck;
+
+    // LinearLayout containing the player's card ImageViews
+    LinearLayout playerDeck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,30 +51,37 @@ public class MainActivity extends AppCompatActivity {
         drawText = findViewById(R.id.drawsText);
         loseText = findViewById(R.id.loseText);
         blackjackText = findViewById(R.id.blackjackText);
+
+        // LinearLayout containing the dealer's card ImageViews
+        dealerDeck = findViewById(R.id.dealer_deck);
+
+        // LinearLayout containing the player's card ImageViews
+        playerDeck = findViewById(R.id.player_deck);
+
     }
 
-    private void disableDealButton()
-    {
-        // Disables the Deal button and enables the Hit and Stay buttons
-        dealButton.setEnabled(false);
-        hitButton.setEnabled(true);
-        stayButton.setEnabled(true);
-    }
+/*------------------------------------------------------------------------------------------------
+   Public Methods
+*-------------------------------------------------------------------------------------------------*/
 
-    private void enableDealButton()
-    {
-        // Disables the Deal button and enables the Hit and Stay buttons
-        dealButton.setEnabled(true);
-        hitButton.setEnabled(false);
-        stayButton.setEnabled(false);
-    }
-
-    // Starts a new game and resets all formatting done
+    // Starts when the Deal button is clicked
     public void deal(View view)
     {
-        resetScoreBackgroundColors();
+        // Removes the background color of Win/Lose/Draw/Blackjack TextViews
+        resetScoreTextBackgroundColors();
+
+        // Runs deal in blackjackGame and stores the result
         String dealResult = blackjackGame.deal();
-        switch (dealResult) {
+
+        /*
+         * Based on the String result of blackjackGame.deal()
+         * Displays the player and dealer's cards
+         * If the player gets blackjack:
+              - Update the displayed score
+         * Otherwise disable the Deal button and enable the Hit and Stay buttons
+         */
+        switch (dealResult)
+        {
             case "win":
                 updateScore("blackjack");
                 updateScore("win");
@@ -78,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 updateScore("blackjack");
                 updateScore("draw");
                 break;
+            // If the player doesn't get blackjack (21)
             default:
                 // Disables the deal button and enables the hit and stay buttons
                 disableDealButton();
@@ -87,10 +100,93 @@ public class MainActivity extends AppCompatActivity {
         addDealerDeckImages();
     }
 
+    /*
+     * Based on the String result of blackjackGame.hit()
+     * Displays the player's new Hand
+     * If the player busts (goes over 21):
+          - Update the displayed score
+          - Enable the Deal button
+          - Disable the Hit and Stay buttons
+     * Otherwise if the player gets exactly 21, disable the Hit button so he/she doesn't accidentally bust
+     */
+    public void hit(View view)
+    {
+        String hitResult = blackjackGame.hit();
+        // If the player busts (goes over 21)
+        if (hitResult.equals("lose"))
+        {
+            updateScore(hitResult);
+            // Enables the deal button and disables the hit and stay buttons
+            enableDealButton();
+        }
+        // If the player's deck is equal to 21
+        else if(hitResult.equals("21"))
+        {
+            // Disable the Hit button
+            hitButton.setEnabled(false);
+        }
+        // Show the player's new hand
+        addPlayerDeckImages();
+    }
+
+    /*
+     * Updates the displayed score based on blackjackGame.stay(), shows the dealer's hand, and enables the Deal button while disabling the Hit and Stay buttons
+     */
+    public void stay(View view)
+    {
+        updateScore(blackjackGame.stay());
+        addDealerDeckImages();
+        enableDealButton();
+    }
+
+/*------------------------------------------------------------------------------------------------
+   Private Methods
+*-------------------------------------------------------------------------------------------------*/
+
+/*
+ * Displays the updated score and changes the background color of the score updated
+ */
+private void updateScore(String result)
+    {
+        switch (result)
+        {
+            case "win":
+            {
+                TextView winCount = findViewById(R.id.wins);
+                TextView winText = findViewById(R.id.winText);
+                winCount.setText(BlackjackGame.getWins());
+                winText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            }
+            case "draw":
+            {
+                TextView drawCount = findViewById(R.id.draws);
+                TextView drawText = findViewById(R.id.drawsText);
+                drawCount.setText(blackjackGame.getDraws());
+                drawText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            }
+            case "lose":
+            {
+                TextView loseCount = findViewById(R.id.losses);
+                TextView loseText = findViewById(R.id.loseText);
+                loseCount.setText(blackjackGame.getLosses());
+                loseText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            }
+            case "blackjack":
+            {
+                TextView blackjackCount = findViewById(R.id.blackjacks);
+                TextView blackjackText = findViewById(R.id.blackjackText);
+                blackjackCount.setText(blackjackGame.getBlackjacks());
+                blackjackText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            }
+        }
+    }
+
+    // Dynamically creates ImageViews representing the player's hand inside the LinearLayout player_deck
     private void addPlayerDeckImages()
     {
-        // LinearLayout containing the player's card images
-        LinearLayout playerDeck = findViewById(R.id.player_deck);
         playerDeck.removeAllViews();
         for (Card card:blackjackGame.getPlayerHand())
         {
@@ -101,25 +197,30 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams imageViewParameters = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
+
             // Applies the layout parameters to the ImageView
             cardImage.setLayoutParams(imageViewParameters);
+
             // Set the scale type of the ImageView
             cardImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
             // Set adjust view bounds to true
             cardImage.setAdjustViewBounds(true);
+
             // Selects which card's image to use
             cardImage.setImageResource(getDrawableId(card.getName()));
 
+            // Sets the Layout Parameters
             cardImage.getLayoutParams().height = 400;
 
+            // Adds the ImageView to player_deck
             playerDeck.addView(cardImage);
         }
     }
 
+    // Dynamically creates ImageViews representing the dealer's hand inside the LinearLayout dealer_deck
     private void addDealerDeckImages()
     {
-        // LinearLayout containing the player's card images
-        LinearLayout dealerDeck = findViewById(R.id.dealer_deck);
         dealerDeck.removeAllViews();
         for (Card card:blackjackGame.getDealerHand())
         {
@@ -130,21 +231,42 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout.LayoutParams imageViewParameters = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
+
             // Applies the layout parameters to the ImageView
             cardImage.setLayoutParams(imageViewParameters);
+
             // Set the scale type of the ImageView
             cardImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
             // Set adjust view bounds to true
             cardImage.setAdjustViewBounds(true);
+
             // Selects which card's image to use
             cardImage.setImageResource(getDrawableId(card.getName()));
 
+            // Adds the ImageView to dealer_deck
             dealerDeck.addView(cardImage);
         }
     }
 
+    // Disables the Deal button and enables the Hit and Stay buttons
+    private void disableDealButton()
+    {
+        dealButton.setEnabled(false);
+        hitButton.setEnabled(true);
+        stayButton.setEnabled(true);
+    }
 
-    private void resetScoreBackgroundColors()
+    // Enables the Deal button and disables the Hit and Stay buttons
+    private void enableDealButton()
+    {
+        dealButton.setEnabled(true);
+        hitButton.setEnabled(false);
+        stayButton.setEnabled(false);
+    }
+
+    // Removes the background color of Win/Lose/Draw/Blackjack TextViews
+    private void resetScoreTextBackgroundColors()
     {
         winText.setBackgroundColor(0);
         drawText.setBackgroundColor(0);
@@ -152,67 +274,7 @@ public class MainActivity extends AppCompatActivity {
         blackjackText.setBackgroundColor(0);
     }
 
-    private void updateScore(String result)
-    {
-        switch (result) {
-            case "win":
-                TextView winCount = findViewById(R.id.wins);
-                TextView winText = findViewById(R.id.winText);
-                winCount.setText(BlackjackGame.getWins());
-                winText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                break;
-            case "draw": {
-                TextView drawCount = findViewById(R.id.draws);
-                TextView drawText = findViewById(R.id.drawsText);
-                drawCount.setText(blackjackGame.getDraws());
-                drawText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                break;
-            }
-            case "lose": {
-                TextView loseCount = findViewById(R.id.losses);
-                TextView loseText = findViewById(R.id.loseText);
-                loseCount.setText(blackjackGame.getLosses());
-                loseText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                break;
-            }
-            case "blackjack": {
-                TextView blackjackCount = findViewById(R.id.blackjacks);
-                TextView blackjackText = findViewById(R.id.blackjackText);
-                blackjackCount.setText(blackjackGame.getBlackjacks());
-                blackjackText.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-
-            }
-        }
-
-
-    }
-
-
-    public void hit(View view)
-    {
-        String hitResult = blackjackGame.hit();
-        if (hitResult.equals("lose"))
-        {
-            updateScore(hitResult);
-            // Enables the deal button and disables the hit and stay buttons
-            enableDealButton();
-        }
-        // Prevent the player from busting after getting 21
-        else if(hitResult.equals("21"))
-        {
-            hitButton.setEnabled(false);
-        }
-
-        addPlayerDeckImages();
-    }
-
-    public void stay(View view)
-    {
-        updateScore(blackjackGame.stay());
-        addDealerDeckImages();
-        enableDealButton();
-    }
-
+    // @Return the location of the card image based on the parameter cardName
     private int getDrawableId(String cardName)
     {
         switch(cardName)
