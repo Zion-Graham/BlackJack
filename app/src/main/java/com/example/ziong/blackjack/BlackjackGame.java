@@ -92,11 +92,7 @@ public class BlackjackGame
             losses ++;
             return "lose";
         }
-        // Else if the player's hand is equal to 21 return "21"
-        else if(player.getHandValue() == 21)
-        {
-            return "21";
-        }
+
         // Else return the empty string
         else
         {
@@ -162,7 +158,9 @@ public class BlackjackGame
 
     private void finishDealerHand()
     {
-        while (dealer.getHandValue() < 17)
+        // if dealer's hand is lower than the player's hand
+//        while (win() || dealer.getHandValue() < 17)
+        while (dealer.getHandValue() < 17 || player.getHandValue() > dealer.getHandValue())
         {
             dealer.hit(deck.removeCard());
         }
