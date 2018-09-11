@@ -77,6 +77,26 @@ public class Hand
         return value;
     }
 
+    // Checks if the value of a deck is a hard 21
+    // 5, 5, A, .....
+    public boolean isHard()
+    {
+        boolean hard_21 = false;
+
+        if (is_21())
+        {
+            addCard(new Card("Ace of clubs", 11));
+            hard_21 = getValue() > 21;
+            handDeck.remove(handDeck.size() -1);
+        }
+        return  hard_21;
+    }
+
+    private boolean is_21()
+    {
+        return getValue() == 21;
+    }
+
     // @Return the ArrayList of cards in this Hand
     public ArrayList<Card> getCards()
     {

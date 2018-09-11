@@ -27,6 +27,10 @@ public class Player
        return playerHand.getCards();
    }
 
+   public Boolean isHard()
+   {
+      return playerHand.isHard();
+   }
 }
 
 
