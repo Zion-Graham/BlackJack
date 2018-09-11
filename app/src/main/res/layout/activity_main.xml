@@ -175,7 +175,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:onClick="hit"
-            android:enabled="false"/>
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/stay_btn"
@@ -187,8 +187,8 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:layout_gravity="center"
-            android:enabled="false"
-            android:onClick="stay"/>
+            android:onClick="stay"
+            android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

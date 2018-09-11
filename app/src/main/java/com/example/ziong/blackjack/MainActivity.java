@@ -123,12 +123,6 @@ public class MainActivity extends AppCompatActivity {
             // Enables the deal button and disables the hit and stay buttons
             enableDealButton();
         }
-        // If the player's deck is equal to 21
-        else if(hitResult.equals("21"))
-        {
-            // Disable the Hit button
-            hitButton.setEnabled(false);
-        }
         // Show the player's new hand
         addPlayerDeckImages();
     }
@@ -256,17 +250,17 @@ private void updateScore(String result)
     // Disables the Deal button and enables the Hit and Stay buttons
     private void disableDealButton()
     {
-        dealButton.setEnabled(false);
-        hitButton.setEnabled(true);
-        stayButton.setEnabled(true);
+        hitButton.setVisibility(View.VISIBLE);
+        stayButton.setVisibility(View.VISIBLE);
+        dealButton.setVisibility(View.GONE);
     }
 
     // Enables the Deal button and disables the Hit and Stay buttons
     private void enableDealButton()
     {
-        dealButton.setEnabled(true);
-        hitButton.setEnabled(false);
-        stayButton.setEnabled(false);
+        dealButton.setVisibility(View.VISIBLE);
+        hitButton.setVisibility(View.GONE);
+        stayButton.setVisibility(View.GONE);
     }
 
     // Removes the background color of Win/Lose/Draw/Blackjack TextViews
